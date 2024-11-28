@@ -1,10 +1,13 @@
 :root {
-    --primary: #2563eb;
-    --success: #22c55e;
+    --bg-dark: #1f2937;
+    --bg-darker: #111827;
+    --bg-card: #2c3846;
+    --text-light: #f9fafb;
+    --text-muted: #d1d5db;
+    --primary: #3b82f6;
+    --success: #10b981;
     --warning: #f59e0b;
     --danger: #ef4444;
-    --background: #f3f4f6;
-    --text-dark: #1f2937;
     --transition-speed: 0.3s;
 }
 
@@ -12,43 +15,45 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    transition: all var(--transition-speed) ease;
+    scrollbar-width: thin;
+    scrollbar-color: var(--bg-card) var(--bg-darker);
+}
+
+*::-webkit-scrollbar {
+    width: 8px;
+}
+
+*::-webkit-scrollbar-track {
+    background: var(--bg-darker);
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: var(--bg-card);
+    border-radius: 20px;
 }
 
 body {
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    background: var(--background);
-    color: var(--text-dark);
+    background: var(--bg-darker);
+    color: var(--text-light);
     line-height: 1.5;
 }
 
 .container {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
     padding: 2rem;
-    animation: fadeIn 0.5s ease;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
 }
 
 header {
-    background: linear-gradient(90deg, var(--primary), #4f46e5);
-    color: white;
+    background: var(--bg-dark);
+    color: var(--text-light);
     padding: 1rem;
     border-radius: 0.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    animation: slideDown 0.5s ease;
-}
-
-@keyframes slideDown {
-    from { transform: translateY(-100%); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
 }
 
 .add-btn {
@@ -58,44 +63,28 @@ header {
     padding: 0.5rem 1rem;
     border-radius: 0.375rem;
     cursor: pointer;
-    position: relative;
-    overflow: hidden;
+    transition: all 0.3s ease;
 }
 
 .add-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-}
-
-.add-btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.3), transparent);
-    transition: all 0.5s;
-}
-
-.add-btn:hover::before {
-    left: 100%;
+    background: #2563eb;
 }
 
 .filters {
-    margin-bottom: 1.5rem;
     display: flex;
     gap: 0.5rem;
     justify-content: center;
+    margin-bottom: 1.5rem;
 }
 
 .filters button {
-    background: white;
-    border: 1px solid var(--primary);
-    color: var(--primary);
+    background: var(--bg-card);
+    border: none;
+    color: var(--text-muted);
     padding: 0.5rem 1rem;
     border-radius: 0.375rem;
     cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .filters button.active {
@@ -110,17 +99,17 @@ header {
 }
 
 .task-card {
-    background: white;
+    background: var(--bg-card);
     border-radius: 0.5rem;
     padding: 1.5rem;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    transform: translateY(0);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     transition: all 0.3s ease;
+    position: relative;
 }
 
 .task-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px rgba(0,0,0,0.2);
 }
 
 .task-header {
@@ -130,6 +119,10 @@ header {
     margin-bottom: 1rem;
 }
 
+.task-header h3 {
+    color: var(--text-light);
+}
+
 .status-badge {
     padding: 0.25rem 0.75rem;
     border-radius: 9999px;
@@ -137,35 +130,45 @@ header {
     font-weight: 500;
 }
 
-.not-started .status-badge { background: #fee2e2; color: var(--danger); }
-.in-progress .status-badge { background: #fef3c7; color: var(--warning); }
-.completed .status-badge { background: #dcfce7; color: var(--success); }
+.not-started .status-badge { 
+    background: rgba(239, 68, 68, 0.2); 
+    color: var(--danger); 
+}
+.in-progress .status-badge { 
+    background: rgba(245, 158, 11, 0.2); 
+    color: var(--warning); 
+}
+.completed .status-badge { 
+    background: rgba(16, 185, 129, 0.2); 
+    color: var(--success); 
+}
+
+.task-card p {
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+}
 
 .task-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 1rem;
     padding-top: 1rem;
-    border-top: 1px solid #e5e7eb;
-}
-
-.task-actions {
-    display: flex;
-    gap: 0.5rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
 }
 
 .task-actions button {
-    border: none;
     background: none;
-    color: var(--text-dark);
+    border: none;
+    color: var(--text-muted);
     cursor: pointer;
     padding: 0.5rem;
     border-radius: 0.375rem;
+    transition: all 0.3s ease;
 }
 
 .task-actions button:hover {
-    background: rgba(0,0,0,0.05);
+    background: rgba(255,255,255,0.1);
+    color: var(--text-light);
 }
 
 .modal {
@@ -175,45 +178,34 @@ header {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0,0,0,0.7);
     z-index: 1000;
-    animation: fadeIn 0.3s ease;
 }
 
 .modal-content {
-    background: white;
+    background: var(--bg-card);
     max-width: 500px;
     margin: 2rem auto;
     padding: 2rem;
     border-radius: 0.5rem;
-    animation: popIn 0.4s ease;
-}
-
-@keyframes popIn {
-    from { transform: scale(0.7); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
 }
 
 .modal .close {
+    color: var(--danger);
     float: right;
     font-size: 1.5rem;
     cursor: pointer;
-    color: var(--danger);
 }
 
 .form-group {
     margin-bottom: 1rem;
-    animation: slideUp 0.4s ease;
-}
-
-@keyframes slideUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
 }
 
 .form-group label {
     display: block;
     margin-bottom: 0.5rem;
+    color: var(--text-muted);
 }
 
 .form-group input,
@@ -221,9 +213,10 @@ header {
 .form-group select {
     width: 100%;
     padding: 0.5rem;
-    border: 1px solid #d1d5db;
+    background: var(--bg-darker);
+    border: 1px solid var(--bg-card);
     border-radius: 0.375rem;
-    transition: all 0.3s ease;
+    color: var(--text-light);
 }
 
 .form-group input:focus,
@@ -231,7 +224,7 @@ header {
 .form-group select:focus {
     outline: none;
     border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
 }
 
 @media (max-width: 640px) {
