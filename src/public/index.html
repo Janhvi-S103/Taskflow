@@ -18,7 +18,7 @@
                 <button class="add-btn" onclick="openModal()">+ Add New Task</button>
             </div>
         </header>
-
+<br>
         <div class="filters">
             <button onclick="filterTasks('all')" class="active">All</button>
             <button onclick="filterTasks('Not Started')">Not Started</button>
@@ -38,17 +38,14 @@
                     <label for="name">Task Name</label>
                     <input type="text" id="name" name="name" required>
                 </div>
-
                 <div class="form-group">
                     <label for="description">Description</label>
-                    <textarea id="description" name="description" required></textarea>
+                    <textarea id="description" name="description"></textarea>
                 </div>
-
                 <div class="form-group">
                     <label for="deadline">Deadline</label>
-                    <input type="date" id="deadline" name="deadline" required>
+                    <input type="datetime-local" id="deadline" name="deadline" required>
                 </div>
-
                 <div class="form-group">
                     <label for="status">Status</label>
                     <select id="status" name="status">
@@ -57,8 +54,7 @@
                         <option value="Completed">Completed</option>
                     </select>
                 </div>
-
-                <button type="submit" class="add-btn">Create Task</button>
+                <button type="submit">Create Task</button>
             </form>
         </div>
     </div>
