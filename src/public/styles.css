@@ -9,6 +9,7 @@
     --warning: #f59e0b;
     --danger: #ef4444;
     --transition-speed: 0.3s;
+    --gradient-text: linear-gradient(45deg, #3b82f6, #10b981);
 }
 
 * {
@@ -34,9 +35,10 @@
 
 body {
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    background: var(--bg-darker);
-    color: var(--text-light);
-    line-height: 1.5;
+    background-color: #000000;
+    background-image: url('background.svg');
+    background-attachment: fixed;
+    background-size: cover;
 }
 
 .container {
@@ -55,7 +57,45 @@ header {
     align-items: center;
     box-shadow: 0 4px 6px rgba(0,0,0,0.2);
 }
+#background-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: brightness(0.5);
+    z-index: -1;
+    transition: background-image 0.5s ease;
+}
 
+.taskflow-title {
+    font-size: 3rem;
+    font-weight: 900;
+    text-align: center;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    width: 100%;
+    background: var(--gradient-text);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: titlePulse 3s infinite alternate;
+    letter-spacing: 0.5px;
+}
+
+@keyframes titlePulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.header-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
 .add-btn {
     background: var(--primary);
     color: white;
@@ -200,10 +240,12 @@ header {
 
 .form-group {
     margin-bottom: 1rem;
+
 }
 
 .form-group label {
     display: block;
+    margin-top: 1rem;
     margin-bottom: 0.5rem;
     color: var(--text-muted);
 }

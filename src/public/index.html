@@ -3,29 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task Manager</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>TaskFlo</title>
+    <link href="styles.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div id="background-overlay"></div>
     <div class="container">
         <header>
-            <h1>Task Manager</h1>
-            <button class="add-btn" onclick="openModal()">Add New Task</button>
+            <h1 class="taskflow-title">TaskFlo</h1>
+            <div class="header-actions">
+                <input type="file" id="backgroundUpload" accept="image/*" style="display:none;">
+                <button class="add-btn" onclick="document.getElementById('backgroundUpload').click()">Change Background</button>
+                <button class="add-btn" onclick="openModal()">+ Add New Task</button>
+            </div>
         </header>
 
-        <div role="main">
-            <div class="filters">
-                <select id="statusFilter" onchange="filterTasks()">
-                    <option value="all">All</option>
-                    <option value="Not Started">Not Started</option>
-                    <option value="In Progress">In Progress</option>
-                    <option value="Completed">Completed</option>
-                </select>
-            </div>
-
-            <div id="taskList" class="task-grid">
-            </div>
+        <div class="filters">
+            <button onclick="filterTasks('all')" class="active">All</button>
+            <button onclick="filterTasks('Not Started')">Not Started</button>
+            <button onclick="filterTasks('In Progress')">In Progress</button>
+            <button onclick="filterTasks('Completed')">Completed</button>
         </div>
+
+        <div id="taskList" class="task-grid"></div>
     </div>
 
     <div id="taskModal" class="modal">

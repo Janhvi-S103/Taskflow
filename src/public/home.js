@@ -103,6 +103,36 @@ async function deleteTask(taskId) {
     }
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+    // Background upload functionality
+    const backgroundUpload = document.getElementById('backgroundUpload');
+    const backgroundOverlay = document.getElementById('background-overlay');
+
+    // Load saved background
+    const savedBackground = localStorage.getItem('taskflow-background');
+    if (savedBackground) {
+        backgroundOverlay.style.backgroundImage = `url(${savedBackground})`;
+    }
+
+    // Background upload listener
+    backgroundUpload.addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                // Save to localStorage
+                localStorage.setItem('taskflow-background', e.target.result);
+                
+                // Set background
+                backgroundOverlay.style.backgroundImage = `url(${e.target.result})`;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    fetchTasks();
+});
+
 function openModal() {
     document.getElementById('taskModal').style.display = 'block';
 }
@@ -111,4 +141,7 @@ function closeModal() {
     document.getElementById('taskModal').style.display = 'none';
 }
 
-document.addEventListener('DOMContentLoaded', fetchTasks);
+function resetBackground() {
+    localStorage.removeItem('taskflow-background');
+    document.getElementById('background-overlay').style.backgroundImage = 'none';
+}
